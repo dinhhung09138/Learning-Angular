@@ -17,7 +17,7 @@ export class ModalContainerComponent implements OnInit {
     age: 26
     };
 
-  constructor(private modalService: NgbModal, public activeModal: NgbActiveModal) { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
   }
@@ -26,11 +26,11 @@ export class ModalContainerComponent implements OnInit {
 
     const modalRef = this.modalService.open(ModalContentComponent);
 
-    modalRef.componentInstance.user = this.user;
+    // modalRef.componentInstance.user = this.user;
 
-    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-      console.log(receivedEntry);
-    });
+    // modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+    //   console.log(receivedEntry);
+    // });
   }
 
 

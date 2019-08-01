@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ModalContainerComponent } from './modal-container/modal-container.component';
 import { ModalContentComponent } from './modal-content/modal-content.component';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { ModalContentComponent } from './modal-content/modal-content.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    NgbModule,
   ],
   providers: [],
   entryComponents: [ ModalContentComponent ],
