@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-modal-content',
@@ -6,17 +7,18 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./modal-content.component.css']
 })
 export class ModalContentComponent implements OnInit {
-  @Input() public user;
-  @Output() passEntry = new EventEmitter<any>();
+  @Input() message: string;
 
-  constructor() { }
+  constructor(private activeModal: NgbActiveModal) { }
 
   ngOnInit() {
-    console.log(this.user);
+    console.log(this.message);
   }
 
   passBack() {
-    this.passEntry.emit(this.user);
+
+    // Send back data after modal close
+    this.activeModal.close(this.message);
   }
 
 }

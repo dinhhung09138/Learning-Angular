@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ModalContentComponent } from '../modal-content/modal-content.component';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -12,25 +11,30 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalContainerComponent implements OnInit {
 
-  public user = {
-    name: 'Izzat Nadiri',
-    age: 26
-    };
+  @ViewChild(ModalContentComponent, {static: true})
+
+  message: string;
 
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.message = 'Hello world';
   }
 
   openModal() {
 
-    const modalRef = this.modalService.open(ModalContentComponent);
+    const modalRef = this.modalService.open(ModalContentComponent, { size: 'lg'});
+    console.log('open modal: ', this.message);
+    modalRef.componentInstance.message = this.message;
 
-    // modalRef.componentInstance.user = this.user;
+    // get data after modal close
+    modalRef.result.then((result) => {
+      if (result) {
+        console.log('get data after modal close');
+        console.log(result);
+      }
+    });
 
-    // modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
-    //   console.log(receivedEntry);
-    // });
   }
 
 
