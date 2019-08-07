@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl  } from '@angular/forms';
+import { NameValidation } from './name.validation';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      userName: ['', Validators.required],
+      userName: ['', [Validators.required, NameValidation]],
       password: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(10)]],
     });
 
@@ -33,5 +34,7 @@ export class AppComponent implements OnInit {
     }
     console.log(this.form);
   }
+
+
 
 }
