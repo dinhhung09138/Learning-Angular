@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validator  } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators  } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +9,29 @@ import { FormGroup, FormBuilder, Validator  } from '@angular/forms';
 export class AppComponent implements OnInit {
   title = 'form-validation';
 
-  ngOnInit() {
+  form: FormGroup;
+  isSubmit = false;
 
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      userName: ['', Validators.required],
+      password: ['', [Validators.required, Validators.maxLength(30), Validators.minLength(10)]],
+    });
+
+  }
+
+  // conveniences getter for easy access to form controls
+  get f() { return this.form.controls; }
+
+  onSubmit() {
+    this.isSubmit = true;
+    if (this.form.status === 'INVALID') {
+      console.log('Form invalid');
+      return;
+    }
+    console.log(this.form);
   }
 
 }
