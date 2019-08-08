@@ -6,6 +6,9 @@ import { HttpHandler } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
+/**
+ * Set content header into request
+ */
 @Injectable()
 export class HeaderRequestInterceptor implements HttpInterceptor {
 
@@ -13,9 +16,9 @@ export class HeaderRequestInterceptor implements HttpInterceptor {
 
     console.log('header request interceptor');
 
-    // if (!request.url.includes('headers')) {
-    //   return next.handle(request);
-    // }
+    if (!request.url.includes('/hub/notify')) {
+      return next.handle(request);
+    }
 
     // if (request.url.includes('image')) {
     //   return next.handle(request);
@@ -35,6 +38,8 @@ export class HeaderRequestInterceptor implements HttpInterceptor {
     }
 
     const requestModified = request.clone({ headers });
+
+    return throwError('Hello my error');
 
     return next.handle(requestModified);
 
