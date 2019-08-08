@@ -6,8 +6,7 @@ import { AppComponent } from './app.component';
 
 // Use Http service
 import { HttpClientModule } from '@angular/common/http';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './interceptor/token.interceptor';
+import { HttpInterceptorProviders } from './interceptor/index';
 
 @NgModule({
   declarations: [
@@ -15,15 +14,11 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
+    HttpInterceptorProviders,
   ],
   bootstrap: [AppComponent]
 })
